@@ -12,7 +12,7 @@ const SearchModal = ({ filterData, top, setIsActive }) => {
     };
 
     history.push({
-      pathname: '/map',
+      pathname: `/map`,
       search: `?position=${JSON.stringify(currentPosition)}&code=${
         e.target.id
       }&dong=${dong}`,

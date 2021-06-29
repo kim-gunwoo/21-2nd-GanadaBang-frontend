@@ -5,7 +5,7 @@ import { POST_SEARCHFILTERED_API } from '../../config';
 import { icons } from '../../icons';
 import SearchModal from '../../Components/SearchModal/SearchModal';
 import RecommendProduct from '../../Components/RecommendProduct/RecommendProduct';
-import styled from 'styled-components/macro';
+import styled from 'styled-components/';
 
 function Main() {
   const [inputValue, setInputValue] = useState('');

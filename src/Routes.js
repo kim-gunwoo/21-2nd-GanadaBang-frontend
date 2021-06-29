@@ -14,7 +14,6 @@ function Routes() {
       <Nav />
       <Switch>
         <Route exact path="/rooms/:id" component={Product} />
-        <Route exact path="/product" component={Product} />
         <Route exact path="/login" component={LoginModal} />
         <Route exact path="/saleroom" component={SaleRoom} />
         <Route exact path="/map" component={MapPage} />
