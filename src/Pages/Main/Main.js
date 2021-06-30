@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useOutsideClick } from '../../Utils/inputOutsideClick';
+import { useOutsideClick } from '../../Utils/useOutsideClick';
 import { POST_SEARCHFILTERED_API } from '../../config';
 import { icons } from '../../icons';
 import SearchModal from '../../Components/SearchModal/SearchModal';
@@ -33,7 +33,7 @@ function Main() {
   }, [inputValue]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/data/mainProductList.json`)
+    fetch(`http://localhost:3002/data/mainProductList.json`)
       .then(res => res.json())
       .then(res => setRandomData(res));
   }, [setRandomData]);

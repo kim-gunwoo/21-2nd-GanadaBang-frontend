@@ -1,54 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
+import ListBox from './ListBox/ListBox';
+import CookieIcon from './CookieIcon/CookieIcon';
 
 function Product() {
-  // componentDidMount() {
-  //   fetch('http://localhost:3000/data/dummy.json', {
-  //     method: 'GET'
-  // })
-  // .then(function(res) {
-  //   return res.json();
-  // })
-  // .then(function(res) {
-  //   // data를 응답 받은 후의 로직
-  // });
-  //     });
+  const [product, setProduct] = useState({});
+  const [modal, setModal] = useState(false);
+
+  const OptionList = product.normal_option?.map(option => {
+    return (
+      <div>
+        <Optionimg alt="옵션사진" src={option.image_url} />
+        <OptionName>{option.name}</OptionName>
+      </div>
+    );
+  });
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  useEffect(() => {
+    fetch('/data/dummy.json', {
+      method: 'GET',
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (res) {
+        console.log(res.message);
+        setProduct(res.message);
+        // data를 응답 받은 후의 로직
+      });
+  }, []);
 
   return (
     <ProductInner>
       <Container>
         <Header>
           <Detail>
-            <li>
-              <P>원룸</P>
+            <RoomInformation>
+              <RoomType>{product.title}</RoomType>
               <div>
-                <H3>월세 1000/55만원</H3>
+                <Price>
+                  월세{product.deposit}/{product.monthly_rent}
+                </Price>
               </div>
-            </li>
+            </RoomInformation>
             <FloorArea>
-              <P>전용면적</P>
-              <H3>
-                23.14㎡
-                <button>평</button>
-              </H3>
+              <RoomArea>전용면적</RoomArea>
+              <Acreage>{product.room_area}</Acreage>
             </FloorArea>
             <Lrealestate>
-              <P>위코드부동산</P>
-              <Call>연락처보기</Call>
+              <Agent>{product.agent}</Agent>
+              <PhoneNumber>연락처보기</PhoneNumber>
             </Lrealestate>
           </Detail>
-          <DetailInner></DetailInner>
+          <DetailInner>
+            <CookieIcon />
+          </DetailInner>
         </Header>
         <Info>
           <Confirm>
-            <ConfirmDetail1>매물 2021</ConfirmDetail1>
-            <ConfirmDetail2>확인한 매물입니다.</ConfirmDetail2>
+            <ConfirmYear>매물 2021</ConfirmYear>
+            <ConfirmedItem>확인된 매물입니다.</ConfirmedItem>
           </Confirm>
           <InfoDetail>
-            <List>
-              <Title>해당층/건물층</Title>
-              <ListDetail>3층</ListDetail>
-            </List>
+            <ListBox />
           </InfoDetail>
         </Info>
         <Photo>
@@ -57,42 +79,31 @@ function Product() {
             <PhotoMain>
               <Img
                 alt="방안내사진"
-                src="https://lh3.googleusercontent.com/proxy/53MPqzdoYie1qcX49nwYHfyn6p-B1Levg9yWHwiwDd9-MeENbCfwEM95hRwX5BdEmqv8GHvTjRArTKNns6ePCEGALd4aH4P2ziKS9UKDkwk5uMHwEv2UP0qv4icVEtzbh3UyGOSC"
+                src={product?.image}
+                // src="https://i1.wp.com/www.gangnamoneroom.com/wp-content/uploads/2019/08/cdpc.jpg?resize=480%2C360"
               />
             </PhotoMain>
             <PhotoSide>
               <div>
-                <Img
-                  alt="방사이드"
-                  src="https://i1.wp.com/www.gangnamoneroom.com/wp-content/uploads/2019/08/cdpc.jpg?resize=480%2C360"
-                />
+                <Img alt="방사이드" src={product?.image} />
               </div>
               <div>
-                <Img
-                  alt="방사이드"
-                  src="https://i1.wp.com/www.gangnamoneroom.com/wp-content/uploads/2019/08/cdpc.jpg?resize=480%2C360"
-                />
+                <Img alt="방사이드" src={product?.image} />
               </div>
               <div>
-                <Img
-                  alt="방사이드"
-                  src="https://i1.wp.com/www.gangnamoneroom.com/wp-content/uploads/2019/08/cdpc.jpg?resize=480%2C360"
-                />
+                <Img alt="방사이드" src={product?.image} />
               </div>
-              <Slides>
-                <SlidesPlus></SlidesPlus>
-                <Img
-                  alt="방안내사진"
-                  src="https://lh3.googleusercontent.com/proxy/53MPqzdoYie1qcX49nwYHfyn6p-B1Levg9yWHwiwDd9-MeENbCfwEM95hRwX5BdEmqv8GHvTjRArTKNns6ePCEGALd4aH4P2ziKS9UKDkwk5uMHwEv2UP0qv4icVEtzbh3UyGOSC"
-                />
-              </Slides>
+              <SideSlide>
+                <SlidesPlus onClick={openModal}></SlidesPlus>
+                <Img alt="방안내사진" src={product?.image} />
+              </SideSlide>
             </PhotoSide>
           </PhotoList>
         </Photo>
         <div>
           <TextDetail>
             <TextContent>
-              서초역 도보 6분 풀옵션 원룸 위치 좋고 가격 좋은 신축급 컨디션
+              위코드역 도보 6분 풀옵션 원룸 위치 좋고 가격 좋은 신축급 컨디션
               깔끔한 집
             </TextContent>
             <TextContentDetail>
@@ -107,25 +118,54 @@ function Product() {
           </TextDetail>
         </div>
       </Container>
-      <ProductAdditional>
-        <AdditionalInner>
-          <A>가격정보</A>
-          <A>옵션</A>
-          <A>위치 및 기본시설</A>
-          <A>추천매물</A>
-        </AdditionalInner>
-        <RoomDetail></RoomDetail>
-      </ProductAdditional>
+      <div>
+        <FixScroll>
+          <Scroll>
+            <ScrollBar>
+              <BarPrice>월세 1000/55만원</BarPrice>
+              <ScrollAgent>
+                <BarAgent>{product.agent}</BarAgent>
+              </ScrollAgent>
+              <BarPhoneNumber>연락처 보기</BarPhoneNumber>
+            </ScrollBar>
+          </Scroll>
+          <ProductAdditional>
+            <AdditionalInner>
+              <A>가격정보</A>
+              <A>옵션</A>
+              <A>위치</A>
+              <A>추천매물</A>
+            </AdditionalInner>
+          </ProductAdditional>
+        </FixScroll>
+        <RoomDetail>
+          <RoomPrice>
+            <RoomTitle>가격정보</RoomTitle>
+          </RoomPrice>
+          <Option>
+            <RoomTitle>옵션</RoomTitle>
+            <OptionInner>{OptionList}</OptionInner>
+          </Option>
+          <Location>
+            <RoomTitle>위치</RoomTitle>
+          </Location>
+          <Recommendation>
+            <RoomTitle>추천매물</RoomTitle>
+          </Recommendation>
+        </RoomDetail>
+      </div>
     </ProductInner>
   );
 }
 
 //스타일 컴포넌트
 const ProductInner = styled.div`
+  margin-top: 85px;
   width: 100%;
 `;
 
 const Container = styled.div`
+  position: relative;
   width: 1200px;
   height: 100%;
   margin: 0px auto;
@@ -144,15 +184,16 @@ const Detail = styled.ul`
   display: flex;
 `;
 
-const DetailInner = styled.div`
-  display: flex;
-  height: 22px;
-`;
+const RoomInformation = styled.li``;
 
-const P = styled.p`
+const RoomType = styled.p`
   margin-bottom: 5px;
   font-size: 1.2rem;
   color: ${({ theme }) => theme.gray};
+`;
+
+const Price = styled.h3`
+  font-size: 30px;
 `;
 
 const FloorArea = styled.li`
@@ -161,8 +202,13 @@ const FloorArea = styled.li`
   border-left: 1px solid #e7e7e7;
 `;
 
-const H3 = styled.h3`
-  font-size: 3rem;
+const Acreage = styled.h3`
+  font-size: 30px;
+`;
+const RoomArea = styled.p`
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: ${({ theme }) => theme.gray};
 `;
 
 const Lrealestate = styled.li`
@@ -173,7 +219,13 @@ const Lrealestate = styled.li`
   border-left: 1px solid #e7e7e7;
 `;
 
-const Call = styled.button`
+const Agent = styled.p`
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: ${({ theme }) => theme.gray};
+`;
+
+const PhoneNumber = styled.button`
   border: 1px solid #dddddd;
   border-radius: 19px;
   background-color: ${({ theme }) => theme.white};
@@ -183,9 +235,11 @@ const Call = styled.button`
   cursor: pointer;
 `;
 
-// const Button = styled.button`
-//   border: 1pxs solid #22222;
-// `;
+const DetailInner = styled.div`
+  display: flex;
+  height: 22px;
+  align-items: center;
+`;
 
 const Info = styled.div`
   width: 100%;
@@ -200,14 +254,15 @@ const Confirm = styled.div`
   text-align: left;
 `;
 
-const ConfirmDetail1 = styled.p`
+const ConfirmYear = styled.p`
   padding: 0px 20px 0px 15px;
   color: ${({ theme }) => theme.white};
   font-weight: 400;
   font-size: 1.3rem;
   background-color: #0640c0;
 `;
-const ConfirmDetail2 = styled.p`
+
+const ConfirmedItem = styled.p`
   padding: 0px 20px 0px 15px;
   color: ${({ theme }) => theme.white};
   font-weight: 400;
@@ -218,29 +273,6 @@ const InfoDetail = styled.ul`
   border-top: 2px solid #222222;
   display: flex;
   flex-wrap: wrap;
-`;
-
-const List = styled.li`
-  ::before {
-    content: '.';
-    color: rgb(34, 34, 34);
-    margin-right: 7px;
-  }
-  display: inline-flex;
-  width: 25%;
-  height: 50px;
-  border-bottom: 1px solid #ebebeb;
-  line-height: 50px;
-`;
-
-const Title = styled.p`
-  width: 95px;
-  color: rgb(134, 134, 134);
-  font-size: 1.4rem;
-`;
-
-const ListDetail = styled.div`
-  font-size: 1.4rem;
 `;
 
 const Photo = styled.div`
@@ -266,9 +298,7 @@ const PhotoList = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-const PhotoMain = styled.div`
-  height: 420px;
-`;
+const PhotoMain = styled.div``;
 
 const PhotoSide = styled.div`
   display: grid;
@@ -281,7 +311,7 @@ const Img = styled.img`
   cursor: pointer;
 `;
 
-const Slides = styled.div`
+const SideSlide = styled.div`
   ::after {
   }
 `;
@@ -289,7 +319,7 @@ const Slides = styled.div`
 const SlidesPlus = styled.div`
   position: absolute;
   width: calc(100% / 4);
-  height: 210px;
+  height: 50%;
   background-color: rgba(0, 0, 0, 0.75);
   cursor: pointer;
 `;
@@ -303,7 +333,7 @@ const TextDetail = styled.div`
 
 const TextContent = styled.div`
   font-size: 2rem;
-  width: 520px;
+  min-width: 420px;
   padding-right: 150px;
 `;
 
@@ -311,7 +341,6 @@ const TextContentDetail = styled.div`
   font-size: 16px;
   line-height: 26px;
   white-space: pre-wrap;
-  width: calc(100% - 50px);
   padding-right: 20px;
 `;
 
@@ -319,6 +348,62 @@ const ProductAdditional = styled.div`
   border: 1px solid #dddddd;
   height: 58px;
   line-height: 56px;
+  background-color: #ffffff;
+`;
+
+const FixScroll = styled.div`
+  display: inline-block;
+  position: sticky;
+  width: 100%;
+  top: 0px;
+  z-index: 110;
+`;
+
+const Scroll = styled.div`
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  background-color: #326cf9;
+  height: 90px;
+`;
+
+const ScrollBar = styled.div`
+  display: flex;
+  margin: 0px auto;
+  padding: 0px 10px;
+  width: 1200px;
+  height: 100%;
+  z-index: 2;
+  align-items: center;
+`;
+
+const BarPrice = styled.div`
+  color: ${({ theme }) => theme.white};
+  font-size: 25px;
+  font-weight: 400;
+`;
+
+const ScrollAgent = styled.div`
+  margin-left: auto;
+`;
+
+const BarAgent = styled.p`
+  margin-right: 12px;
+  color: ${({ theme }) => theme.white};
+  font-size: 1.6rem;
+`;
+
+const BarPhoneNumber = styled.button`
+  height: 44px;
+  margin-left: 20px;
+  padding: 0px 23px;
+  border: 0px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  color: #326cf9;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
 `;
 
 const AdditionalInner = styled.div`
@@ -340,5 +425,58 @@ const RoomDetail = styled.div`
   margin: 0px auto;
   padding: 0px 10px;
 `;
+
+const RoomPrice = styled.div`
+  padding-top: 120px;
+  padding-bottom: 120px;
+`;
+
+const Option = styled.div`
+  padding-top: 120px;
+  padding-bottom: 120px;
+  position: relative;
+  border-top: 1px solid #dddddd; ;
+`;
+
+const RoomTitle = styled.p`
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 41px;
+`;
+
+const OptionInner = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px 104px;
+  margin-top: 32px;
+`;
+
+const Optionimg = styled.img`
+  width: 162px;
+  height: 70px;
+  margin-top: 40px;
+`;
+
+const OptionName = styled.p`
+  margin-top: 5px;
+  font-size: 1.5rem;
+  line-height: 25px;
+  text-align: center;
+`;
+
+const Location = styled.div`
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  border-top: 1px solid #dddddd;
+`;
+
+const Recommendation = styled.div`
+  padding-top: 120px;
+  padding-bottom: 120px;
+  border-top: 1px solid #dddddd;
+`;
+//ListBox
 
 export default Product;

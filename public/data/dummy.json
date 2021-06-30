@@ -1,68 +1,99 @@
 {
-  "result": [
-    {
-      "id": "해당층",
-      "value": "2층,3층"
+  "message": {
+    "id": 1,
+    "title": "원룸1",
+    "content": "매물정보 원룸 1 풀옵션 ",
+    "location": {
+      "id": 1,
+      "state": "서울특별시",
+      "city": "강남구",
+      "dong": "삼성동",
+      "detail": "테헤란로 427",
+      "latitude": "37.50637292000000",
+      "longitude": "127.05364070000000"
     },
-    {
-      "id": "전용면적",
-      "value": "223.14㎡ / 33.05㎡"
-    },
-    {
-      "id": "방수/욕실수",
-      "value": "1개/1개"
-    },
-    {
-      "id": "방향",
-      "value": "남동"
-    },
-    {
-      "id": "난방종류",
-      "value": "개별난방"
-    },
-    {
-      "id": "빌트인",
-      "value": "빌트인주방"
-    },
-    {
-      "id": "건물 주차수",
-      "value": "총 0대"
-    },
-    {
-      "id": "세대당 주차수",
-      "value": "총 0대"
-    },
-    {
-      "id": "엘리베이터",
-      "value": "없음"
-    },
-    {
-      "id": "반려동물",
-      "value": "불가능"
-    },
-    {
-      "id": " 베란다/발코니",
-      "value": "있음"
-    },
-    {
-      "id": "전세자금대출",
-      "value": "불가능"
-    },
-    {
-      "id": "입주가능일",
-      "value": "즉시 입주"
-    },
-    {
-      "id": "주용도",
-      "value": "단독주택"
-    },
-    {
-      "id": "사용승인일",
-      "value": "1987.07.23"
-    },
-    {
-      "id": "최초 등록일",
-      "value": "2021.06.23"
-    }
-  ]
+    "room_type": "ONE_ROOM",
+    "trade_type": "MONTHLY_RENT",
+    "monthly_rent": 30,
+    "deposit": 100,
+    "sale": 0,
+    "agent": "성규부동산",
+    "floor": 1,
+    "room_area": 10.12,
+    "room_count": 1,
+    "bathroom_count": 1,
+    "heating_type": "개별",
+    "elevator": "유",
+    "created_at": "2021-06-23",
+    "image": ["https://i.imgur.com/SwiHvRG.png"],
+    "normal_option": [
+      {
+        "name": "에어컨",
+        "image_url": "https://www.dabangapp.com/static/media/aircondition.e635232d.svg",
+        "option_type": "NORMAL"
+      },
+      {
+        "name": "세탁기",
+        "image_url": "https://www.dabangapp.com/static/media/laundry.030d913d.svg",
+        "option_type": "NORMAL"
+      },
+      {
+        "name": "신발장",
+        "image_url": "https://www.dabangapp.com/static/media/shoes.9a00f9bc.svg",
+        "option_type": "NORMAL"
+      },
+      {
+        "name": "냉장고",
+        "image_url": "https://www.dabangapp.com/static/media/refrigerator.1d986b2c.svg",
+        "option_type": "NORMAL"
+      },
+      {
+        "name": "가스레인지",
+        "image_url": "https://www.dabangapp.com/static/media/gas.5823444e.svg",
+        "option_type": "NORMAL"
+      },
+      {
+        "name": "옷장",
+        "image_url": "https://www.dabangapp.com/static/media/closet.61cb1751.svg",
+        "option_type": "NORMAL"
+      },
+      {
+        "name": "인덕션",
+        "image_url": "https://www.dabangapp.com/static/media/induction.e57b4890.svg",
+        "option_type": "NORMAL"
+      },
+      {
+        "name": "비데",
+        "image_url": "https://m.dabangapp.com/static/media/bidet.581ee9a3.svg",
+        "option_type": "NORMAL"
+      },
+      {
+        "name": "TV",
+        "image_url": "https://www.dabangapp.com/static/media/tv.545c9579.svg",
+        "option_type": "NORMAL"
+      }
+    ],
+    "security_option": [
+      {
+        "name": "전자도어락",
+        "image_url": "https://www.dabangapp.com/static/media/doorlock.1b4ae1e7.svg",
+        "option_type": "SECURITY"
+      },
+      {
+        "name": "CCTV",
+        "image_url": "https://www.dabangapp.com/static/media/cctv.82eb8ea7.svg",
+        "option_type": "SECURITY"
+      },
+      {
+        "name": "방범창",
+        "image_url": "https://www.dabangapp.com/static/media/windowguard.9763544a.svg",
+        "option_type": "SECURITY"
+      },
+      {
+        "name": "인터폰",
+        "image_url": "https://www.dabangapp.com/static/media/intercom.a85eac33.svg",
+        "option_type": "SECURITY"
+      }
+    ]
+  }
 }
