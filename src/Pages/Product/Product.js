@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import ListBox from './ListBox/ListBox';
-import CookieIcon from './CookieIcon/CookieIcon';
+import ListBox from '../../Components/ListBox/ListBox';
+import CookieIcon from '../../Components/CookieIcon/CookieIcon';
 
 function Product() {
   const [product, setProduct] = useState({});
